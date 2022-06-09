@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>replit</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=1kWqFEeR"></script>
+  </head>
+  <body>
+    <div id="whole"></div>
+    <audio loop="false" width="0" height="0" id="sound" src="hi.mp3" type="audio/mp3"></audio>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+	   <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+
+    <script>
+if (annyang) {
+  var commands = {
+          "Jarvis hello": hello,
+	  "Jarvis good morning": hello,
+	  "Jarvis good afternoon": hello,
+          "Jarvis hey": hello,
+          "Jarvis hi": hello,
+          "Jarvis whats up": hello,
+          "Jarvis what is up": hello,
+          "Hey Jarvis": hello,
+          "hi Jarvis": hello,
+          "hello Jarvis": hello,
+          'jarvis help': helpp,
+          'jarvis help me': helpp,
+          'jarvis time': time,
+          'jarvis what time is it': time,
+          'jarvis how are you': howareu,
+          'great': good,
+          'good': good,
+	  		'jarvis open (link) (website) *link': link,
+          'amazing': good,
+          'i am great': good,
+          'i am good': good,
+          'i am amazing': good,
+          'bad': bad,
+          'horrible': bad,
+          'trash': bad,
+          'i am bad': bad,
+          'i am horrible': bad,
+          'i am trash': bad,
+	  "Jarvis (google) search (google) (for) *search": search,
+          'tell me a joke': joke,
+          'tell me a joke jarvis': joke,
+          'jarvis joke': joke,
+          'jarvis tell me a joke': joke,
+          'jarvis battery': battery,
+          'jarvis how much battery do i have': battery,
+          'jarvis how much battery do i have left': battery,
+          'jarvis how much juice do i have': battery,
+          'jarvis good night': bye,
+          'jarvis bye': bye,
+          'jarvis bye-bye': bye,
+          'jarvis sleep': bye,
+          'jarvis sorry': sorry,
+          'jarvis my bad': sorry,
+          "Jarvis wake": wake,
+          "Jarvis wake up": wake,
+	  "Jarvis send (a) (an) email *body": email,
+			  "Jarvis email *body": email,
+	  "jarvis (find me a) book called *book": book,
+	  
+          "wake Jarvis": wake,
+	  'Jarvis calender': calender,
+	  'Jarvis what do i have (to do) today': calender,
+          "wake up Jarvis": wake,
+          "wake up": wake,
+          "wake": wake,
+	'jarvis play (music) (from soundcloud) *play': play,
+	  'jarvis remind me to *task in *minutes': task,
+	  "Jarvis *after": jarvis,
+	  
+  };
+
+  // Add our commands to annyang
+  annyang.addCommands(commands);
+function help() {
+          location.reload();
+        }
+
+        function nexttt() {
+          document.getElementById("whole").style.display = "none";
+        }
+
+        function yougotthis() {
+          location.reload();
+        }
+
+        function wake() {
+          responsiveVoice.speak("Thank you for saving me sir", "UK English Male", {
+            onend: yougotthis
+          });
+        };
+
+        function sorry() {
+          responsiveVoice.speak("it's okay sir", "UK English Male", {
+            onend: help
+          });
+        }
+
+        function bye() {
+          responsiveVoice.speak("Good bye sir", "UK English Male", {
+            onend: nexttt
+          });
+        }
+
+        function howareu() {
+          responsiveVoice.speak("I am good how are you", "UK English Male", {
+            onend: help
+          });
+        }
+
+        function battery() {
+          navigator.getBattery().then(function(battery) {
+            var level = battery.level * 100 + "%";
+            responsiveVoice.speak("You have " + level + " remaining", "UK English Male", {
+              onend: help
+            });
+          });
+        }
+
+	function link(link){
+		window.open("http://www." + link + ".com", "_blank");
+		responsiveVoice.speak("Opening " + link, "UK English Male", {
+            onend: help
+          });
+	}
+		function task(minutes, task){
+		responsiveVoice.speak("Opening " + minutes + " " + task, "UK English Male", {
+            onend: help
+          });
+	}
+		
+	function email(body){
+		window.open("https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=&body=" + body, "_blank");
+		responsiveVoice.speak("Opening gmail. I am going to send " + body, "UK English Male", {
+            onend: help
+          });
+	}
+	function search(search){
+				var b;
+$.get("https://hackingtonsapiproxy.herokuapp.com/https://api.duckduckgo.com/?q="+search+"&format=json", function(a) {
+b = JSON.parse(a);
+if(b.Abstract=="") {
+	responsiveVoice.speak("I could not find anything for " +search, "UK English Male", {onend: help});
+}
+  else{
+	  responsiveVoice.speak("" +  b.Abstract, "UK English Male", {onend: help});
+    
+      }
+});
+}
+
+	function play(play){
+		window.open("https://soundcloud.com/search?q=" + play, "_blank");
+		responsiveVoice.speak("Searching soundcloud for " + play, "UK English Male", {
+            onend: help
+          });
+	}
+		function calender(){
+			responsiveVoice.speak("Checking your calender. There was an error. opening up your calender", "UK English Male", {
+            onend: help
+          });
+		window.open("https://calendar.google.com/calendar/u/0/r", "_blank");
+	}
+		function book(book){
+			responsiveVoice.speak("finding a book called " + book, "UK English Male", {
+            onend: help
+          });
+		window.open("https://www.google.com/search?tbm=bks&q=" + book, "_blank");
+	}
+	
+	
+
+        function joke() {
+          responsiveVoice.speak("why do we tell actors to break a leg, because every movie has a cast", "UK English Male", {
+            onend: help
+          });
+        }
+
+        function bad() {
+          responsiveVoice.speak("thats not good. if you want a chear up say jarvis tell me a joke", "UK English Male", {
+            onend: help
+          });
+        }
+
+        function good() {
+          responsiveVoice.speak("That's great! if you need anything just say my name", "UK English Male", {
+            onend: help
+          });
+        }
+
+        function hello() {
+          responsiveVoice.speak("hello sir", "UK English Male", {
+            onend: help
+          });
+        }
+
+        function jarvis(after) {
+          responsiveVoice.speak("I am sorry I do not understand please try again", "UK English Male", {
+            onend: help
+          });
+        }
+
+        function time() {
+          var dt = new Date();
+          var options = {
+            timeZone: "America/Los_Angeles",
+            hour12: true,
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric"
+          };
+          // something like "Thursday, February 14, 2019, 02:55"
+          console.log(dt.toLocaleString("en-US", options));
+          var time = dt.toLocaleString("en-US", options);
+          responsiveVoice.speak("it is " + time, "UK English Male", {
+            onend: help
+          });
+        }
+
+        function helpp() {
+          document.getElementById('sound').play();
+          responsiveVoice.speak("If this is an emergency please dial 911 but if you need to calm down I am here to help. Let's breeth in for 5 seconds", "UK English Male", {
+            onend: next
+          });
+        }
+        // annyang.addCommands(codeword);
+        annyang.start({
+          autoRestart: true,
+          continuous: false
+        });
+      }
+      //# sourceURL=pen.js
+      function next() {
+        responsiveVoice.speak("5 4 3 2 1", "UK English Male", {
+          rate: 0.5,
+          onend: nextone
+        });
+      }
+
+      function nextone() {
+        responsiveVoice.speak("Next let's breeth out", "UK English Male", {
+          onend: nextonee
+        });
+      }
+
+      function nextonee() {
+        responsiveVoice.speak("5 4 3 2 1", "UK English Male", {
+          rate: 0.5,
+          onend: nextoneee
+        });
+      }
+
+      function nextoneee() {
+        responsiveVoice.speak("You keep on doing this and I will let you calm down. I will keep the music playing. And remember that you can do this. keep saying that in your head. when you want to stop the music say jarvis stop", "UK English Male");
+      }
+  // Start listening. You can call this here, or attach this call to an event, button, etc.
+  annyang.start();
+
+</script>
+    <script src="script.js"></script>
+  </body>
+</html>
